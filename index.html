@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 3D Cube</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #1a1a2e;
+            overflow: hidden;
+        }
+
+        .cube-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            transform-style: preserve-3d;
+            animation: rotate 10s infinite linear;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotateX(-30deg) rotateY(0deg); }
+            100% { transform: rotateX(-30deg) rotateY(360deg); }
+        }
+
+        .face {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+
+        /* Front face - using skew for perspective effect */
+        .front {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transform: translateZ(100px);
+        }
+
+        /* Back face */
+        .back {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            transform: translateZ(-100px) rotateY(180deg);
+        }
+
+        /* Right face - using skewY for side perspective */
+        .right {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            transform: translateX(100px) rotateY(90deg);
+        }
+
+        /* Left face */
+        .left {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            transform: translateX(-100px) rotateY(-90deg);
+        }
+
+        /* Top face - using skewX for top perspective */
+        .top {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            transform: translateY(-100px) rotateX(90deg);
+        }
+
+        /* Bottom face */
+        .bottom {
+            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+            transform: translateY(100px) rotateX(-90deg);
+        }
+
+        /* Alternative version using skew for flat 3D effect */
+        .cube-flat {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin-top: 100px;
+        }
+
+        .cube-flat .face-flat {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+        }
+
+        .cube-flat .front-flat {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transform: translate(0, 0);
+            z-index: 3;
+        }
+
+        .cube-flat .right-flat {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            transform: translate(200px, 0) skewY(-30deg);
+            transform-origin: left center;
+            width: 100px;
+            z-index: 2;
+        }
+
+        .cube-flat .top-flat {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            transform: translate(0, -100px) skewX(-60deg);
+            transform-origin: bottom center;
+            height: 100px;
+            z-index: 1;
+        }
+
+        .title {
+            position: absolute;
+            top: 20px;
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .scene {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 50px;
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="scene">
+        <div class="title">CSS 3D Cube with Gradient Sides</div>
+
+        <!-- True 3D Cube using translate and rotate -->
+        <div class="cube-container">
+            <div class="face front">Front</div>
+            <div class="face back">Back</div>
+            <div class="face right">Right</div>
+            <div class="face left">Left</div>
+            <div class="face top">Top</div>
+            <div class="face bottom">Bottom</div>
+        </div>
+
+        <!-- Flat 3D Cube using skew -->
+        <div class="cube-flat">
+            <div class="face-flat front-flat"></div>
+            <div class="face-flat right-flat"></div>
+            <div class="face-flat top-flat"></div>
+        </div>
+    </div>
+</body>
+</html>
